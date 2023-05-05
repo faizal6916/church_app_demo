@@ -7,6 +7,7 @@ import 'package:church_app/screens/profile_screen.dart';
 import 'package:church_app/screens/testimonial_screen.dart';
 import 'package:church_app/util/color_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -65,7 +66,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
   }
 
   Widget menuItem({String? name,IconData? ico, Widget? nav})=>GestureDetector(
-    onTap: (){
+    onTap:(name == 'Logout')?(){
+      SystemNavigator.pop();
+    }: (){
       Navigator.push(context, MaterialPageRoute(builder: (ctx)=>nav!));
     },
     child: Container(
@@ -76,7 +79,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
         BoxShadow(
-          color: Colors.grey,
+          color: Colors.grey.withOpacity(0.2),
           blurRadius: 15.0, // soften the shadow
           spreadRadius: 5.0, //extend the shadow
           offset: Offset(
