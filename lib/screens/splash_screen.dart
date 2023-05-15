@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'login_screen.dart';
+import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,8 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigate(){
    Timer(Duration(seconds: 3),
-        () => Navigator.push(context, MaterialPageRoute(builder: (ctx)=>LoginScreen())));
+        // () => Navigator.push(context, MaterialPageRoute(builder: (ctx)=>LoginScreen())));
         //() => Navigator.of(context).push(createRoute(NoConnection())));
+        () => Navigator.push(context, MaterialPageRoute(builder: (ctx)=>OnboardingScreen())));
   }
   @override
   void initState() {

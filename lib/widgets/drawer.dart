@@ -3,8 +3,11 @@ import 'package:church_app/screens/bible_screen.dart';
 import 'package:church_app/screens/dashboard.dart';
 import 'package:church_app/screens/donation_screen.dart';
 import 'package:church_app/screens/event_screen.dart';
+import 'package:church_app/screens/prayer_request.dart';
 import 'package:church_app/screens/profile_screen.dart';
 import 'package:church_app/screens/testimonial_screen.dart';
+import '../screens/volunteer_signup.dart';
+import '../widgets/drawer.dart';
 import 'package:church_app/util/color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,11 +24,11 @@ class CustomDrawer extends StatefulWidget {
 
 class _CustomDrawerState extends State<CustomDrawer> {
   List<Map<String,dynamic>> _menuItem =[{
-    'name':'Announcement',
-    'icon':Icons.campaign_outlined,
-     'navigation':AnnouncementScreen()
+    'name':'Prayer Request',
+    'icon':Icons.forward_to_inbox,
+     'navigation':PrayerRequest()
   },{
-    'name':'View Testimonials',
+    'name':'Sermon Archives',
     'icon':Icons.folder_open,
     'navigation': TestimonialScreen()
   },
@@ -35,8 +38,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
      'navigation': EventScreen()
   },
   {
-    'name': 'Bible',
-    'icon': Icons.import_contacts,
+    'name': 'Live Stream',
+    'icon': Icons.live_tv_outlined,
     'navigation': BibleScreen()
   },
   {
@@ -48,6 +51,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
     'name': 'View Profile',
     'icon': Icons.account_circle_outlined,
     'navigation':ProfileScreen()
+  },
+  {
+    'name':'Volunteer Signup',
+    'icon':Icons.person_add_outlined,
+     'navigation':VolunteerSignup()
   },
   {
     'name': 'Logout',
@@ -95,7 +103,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
         children: [
         Icon(ico!,size: 32,color: ColorUtil.navyBlue,),
         SizedBox(height: 20,),
-        SizedBox(width: 1.sw,child: Text(name!,style: TextStyle(fontSize: 16,color: Colors.black),textAlign: TextAlign.center,))
+        SizedBox(width: 1.sw,height: 60,child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(child: Text(name!,style: TextStyle(fontSize: 16,color: Colors.black),textAlign: TextAlign.center,maxLines: 2,)),
+        ))
       ]),
     ),
   );

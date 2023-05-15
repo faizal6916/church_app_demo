@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
           // You can use the library anywhere in the app even in theme
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
+           // textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
+           textTheme: Typography.englishLike2014.apply(fontSizeFactor: 1.sp)
           ),
           home: child,
           //  routes: {
