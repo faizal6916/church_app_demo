@@ -1,11 +1,12 @@
 import 'package:church_app/screens/announcement_screen.dart';
-import 'package:church_app/screens/bible_screen.dart';
+import 'package:church_app/screens/live_stream.dart';
 import 'package:church_app/screens/dashboard.dart';
 import 'package:church_app/screens/donation_screen.dart';
 import 'package:church_app/screens/event_screen.dart';
 import 'package:church_app/screens/prayer_request.dart';
 import 'package:church_app/screens/profile_screen.dart';
 import 'package:church_app/screens/testimonial_screen.dart';
+import 'package:church_app/screens/youtube_live_stream.dart';
 import '../screens/volunteer_signup.dart';
 import '../widgets/drawer.dart';
 import 'package:church_app/util/color_util.dart';
@@ -40,7 +41,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   {
     'name': 'Live Stream',
     'icon': Icons.live_tv_outlined,
-    'navigation': BibleScreen()
+    'navigation': LiveStream()
   },
   {
     'name': 'Donate',

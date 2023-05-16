@@ -18,8 +18,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  String? _gender;
   //AuthMode _authMode = AuthMode.signup;
-  Gender? _gender;
+  //Gender? _gender;
+  String? gender;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,8 +140,12 @@ class _LoginScreenState extends State<LoginScreen> {
               // ),        
               //SizedBox(height: 200,),
               TextFormField(
+                controller: nameController,
+                style: TextStyle(color: ColorUtil.navyBlue),
                       decoration: InputDecoration(helperText: ' ',
                                   labelText: 'Name',
+                                  //fillColor: ColorUtil.navyBlue,
+
                                   labelStyle: TextStyle(color: ColorUtil.navyBlue),
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide:
@@ -155,6 +167,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                         TextFormField(
+                          controller: ageController,
+                          style: TextStyle(color: ColorUtil.navyBlue),
                       decoration: InputDecoration(helperText: ' ',
                                   labelText: 'Age',
                                   labelStyle: TextStyle(color: ColorUtil.navyBlue),
@@ -182,23 +196,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         
-                        Radio(value: Gender.male
-                        , groupValue: _gender, onChanged: (value){
+                        Radio(value: "male"
+                        , groupValue: gender, onChanged: (value){
                           setState(() {
-                            _gender = value!;
+                            gender = value!;
+                            
                           });
                         }),
-                        SizedBox(width: 120,child: Text('male',style: TextStyle(color: ColorUtil.navyBlue,fontSize: 16),)),
-                             Radio(value: Gender.female
-                        , groupValue: _gender, onChanged: (value){
+                        Text('male',style: TextStyle(color: ColorUtil.navyBlue,fontSize: 16),),
+                       // SizedBox(width: 60,child: Text('male',style: TextStyle(color: ColorUtil.navyBlue,fontSize: 16),)),
+                             Radio(value: "female"
+                        , groupValue: gender, onChanged: (value){
                           setState(() {
-                            _gender = value!;
+                            gender = value!;
                           });
                         }),
                         Text('female',style: TextStyle(color: ColorUtil.navyBlue,fontSize: 16),),
+                           Radio(value: "other"
+                        , groupValue: gender, onChanged: (value){
+                          setState(() {
+                            gender = value!;
+                          });
+                        }),
+                        Text('other',style: TextStyle(color: ColorUtil.navyBlue,fontSize: 16),),
                       ],
                     ),
                         TextFormField(
+                          controller: emailController,
+                          style: TextStyle(color: ColorUtil.navyBlue),
                       decoration: InputDecoration(helperText: ' ',
                                   labelText: 'Email',
                                   labelStyle: TextStyle(color: ColorUtil.navyBlue),
@@ -222,6 +247,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                         TextFormField(
+                          controller: phoneController,
+                          style: TextStyle(color: ColorUtil.navyBlue),
                       decoration: InputDecoration(helperText: ' ',
                                   labelText: 'Phone',
                                   labelStyle: TextStyle(color: ColorUtil.navyBlue),
@@ -246,6 +273,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFormField(
                      // maxLines: 4,
+                     controller: addressController,
+                     style: TextStyle(color: ColorUtil.navyBlue),
                       decoration: InputDecoration(
                         
                         helperText: ' ',
@@ -271,7 +300,40 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     SizedBox(height: 30,),
-                    ElevatedButton(onPressed: (){}, child: Text('Create Account'),style: ElevatedButton.styleFrom(
+                    ElevatedButton(onPressed: (){
+                       if(nameController.text.isNotEmpty){
+                          print(nameController.text);
+                          
+                          if(ageController.text.isNotEmpty){
+                            print(ageController.text);
+                            if(gender != null){
+                              print(gender);
+                              if(emailController.text.isNotEmpty){
+                                print(emailController.text);
+                                if(phoneController.text.isNotEmpty){
+                                  print(phoneController.text);
+                                  if(addressController.text.isNotEmpty){
+                                    print(addressController.text);
+                                    showSnackbar('Account Created Successfully', Colors.green);
+                                  }else{
+                                    showSnackbar('Please Enter Your Address',Colors.red);
+                                  }
+                                }else{
+                                  showSnackbar('Please Enter Your Mobile Number',Colors.red);
+                                }
+                              }else{
+                                showSnackbar('Please Enter Your Email',Colors.red);
+                              }
+                            }else{
+                              showSnackbar('Please Select Your Gender',Colors.red);
+                            }
+                          }else{
+                            showSnackbar('Please Enter Your Age',Colors.red);
+                          }
+                        }else{
+                          showSnackbar('Please Enter Your Name',Colors.red);
+                        }
+                    }, child: Text('Create Account'),style: ElevatedButton.styleFrom(
                     primary: ColorUtil.navyBlue,
                       minimumSize: Size(1.sw, 50)
                     ),)
@@ -280,5 +342,8 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+  void showSnackbar(String content, Color snackColor){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content),backgroundColor: snackColor,padding: EdgeInsets.all(15),shape: StadiumBorder(),behavior: SnackBarBehavior.floating,));
   }
 }
